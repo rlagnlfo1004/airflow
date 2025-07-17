@@ -8,7 +8,6 @@ with DAG(
     schedule="0 0 * * *",
     start_date=pendulum.datetime(2025, 7, 1, tz="Asia/Seoul"),
     catchup=False,
-    tags=["example", "example2", "example3"],
 ) as dag:
     
     # [START howto_operator_bash]
