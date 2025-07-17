@@ -3,6 +3,9 @@ from airflow.providers.standard.operators.python import PythonOperator
 from airflow.sdk import DAG
 from common.common_func import get_sftp
 
+import sys
+print("PYTHONPATH is: ", sys.path)
+
 with DAG(
     dag_id = "dags_python_import_func",
     schedule = "30 6 * * *",
