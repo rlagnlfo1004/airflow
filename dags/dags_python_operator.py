@@ -1,6 +1,5 @@
 from airflow.sdk import DAG
 import pendulum
-import datetime
 from airflow.providers.standard.operators.python import PythonOperator
 import random
 

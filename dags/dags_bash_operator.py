@@ -1,5 +1,4 @@
 from airflow.sdk import DAG
-import datetime
 import pendulum
 from airflow.providers.standard.operators.bash import BashOperator
 

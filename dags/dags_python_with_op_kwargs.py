@@ -1,7 +1,8 @@
-import pendulum
-from airflow.providers.standard.operators.python import PythonOperator
-from airflow.sdk import DAG
 from common.common_func import regist2
+import pendulum
+
+from airflow.sdk import DAG
+from airflow.providers.standard.operators.python import PythonOperator
 
 with DAG(
     dag_id = "dags_python_with_op_kwargs",
