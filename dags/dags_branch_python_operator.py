@@ -10,7 +10,7 @@ with DAG(
     catchup=False,
 ) as dag:
 
-    def select_random():
+    def select_random(**kwargs):
         from random import choice
         item_lst = ['A', 'B', 'C']
         selected_item = choice(item_lst)

@@ -1,24 +1,28 @@
 import pendulum
-from airflow.sdk import DAG, task
+from airflow.sdk import DAG
+from airflow.providers.standard.operators.branch import BaseBranchOperator
 from airflow.providers.standard.operators.python import PythonOperator
 
 with DAG(
-    dag_id='dags_python_with_branch_decorator',
+    dag_id='dags_base_branch_operator',
     start_date=pendulum.datetime(2025, 7, 1, tz='Asia/Seoul'),
     schedule='0 1 * * *',
     catchup=False,
 ) as dag:
 
-    @task.branch(task_id='select_random')
-    def select_random():
-        from random import choice
-        item_lst = ['A', 'B', 'C']
-        selected_item = choice(item_lst)
 
-        if selected_item == 'A':
-            return 'task_a'
-        elif selected_item in ['B', 'C']:
-            return ['task_b', 'task_c']
+    class CustomBaseBranchOperator(BaseBranchOperator):
+        def choose_branch(self, context):
+            from random import choice
+            item_lst = ['A', 'B', 'C']
+            selected_item = choice(item_lst)
+
+            if selected_item == 'A':
+                return 'task_a'
+            elif selected_item in ['B', 'C']:
+                return ['task_b', 'task_c']
+
+    custom_base_branch_operator = CustomBaseBranchOperator(task_id='python_branch_task')
 
     def common_func(**kwargs):
         print(kwargs['selected'])
@@ -41,7 +45,7 @@ with DAG(
         op_kwargs={'selected': 'C'}
     )
 
-    select_random() >> [task_a, task_b, task_c]
+    custom_base_branch_operator >> [task_a, task_b, task_c]
 
 
 
