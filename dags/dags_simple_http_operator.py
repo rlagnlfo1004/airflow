@@ -13,7 +13,7 @@ with DAG(
 
     tb_cycle_station_info = HttpOperator(
         task_id='tb_cycle_station_info',
-        http_conn_id='openapi.seoul.go.kr',
+        http_conn_id='openapi-seoul-data',
         endpoint='{{ var.value.apikey_openapi_seoul_go_kr }}/json/tbCycleStationInfo/1/10/',
         method='GET',
         headers={'Content-Type': 'application/json',
