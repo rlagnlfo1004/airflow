@@ -9,7 +9,7 @@ with DAG(
     catchup=False
 ) as dag:
 
-    @task(task_id='branching')
+    @task.branch(task_id='branching')
     def random_branch():
         from random import choice
         item_lst = ['A', 'B', 'C']
@@ -17,8 +17,10 @@ with DAG(
 
         if selected_item == 'A':
             return 'task_a'
-        elif selected_item in ['B', 'C']:
-            return ['task_b', 'task_c']
+        elif selected_item == 'B':
+            return 'task_b'
+        elif selected_item == 'C':
+            return 'task_c'
 
 
     task_a = BashOperator(
