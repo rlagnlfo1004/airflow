@@ -14,21 +14,21 @@ with DAG(
         from contextlib import closing
 
         postgres_hook = PostgresHook(postgres_conn_id)
-        with closing(PostgresHook.get_conn()) as conn:
+        with closing(postgres_hook.get_conn()) as conn:
             with closing(conn.cursor()) as cursor:
                 dag_id = kwargs.get('ti').dag_id
                 task_id = kwargs.get('ti').task_id
                 run_id = kwargs.get('ti').run_id
-                msg = 'hook inset 수행'
-                sql = 'insert into py_opr_drct_inset values (%s, %s, %s, %s);'
+                msg = 'hook insrt 수행'
+                sql = 'insert into py_opr_drct_insrt values (%s, %s, %s, %s);'
 
                 cursor.execute(sql, (dag_id, task_id, run_id, msg))
                 conn.commit()
 
-    insrt_postgres = PythonOperator(
-        task_id = 'insrt_postgres',
+    insrt_postgres_with_hook = PythonOperator(
+        task_id = 'insrt_postgres_with_hook',
         python_callable=insrt_postgres,
         op_kwargs={'postgres_conn_id': 'conn-db-postgres-custom'}
     )
 
-    insrt_postgres
+    insrt_postgres_with_hook
