@@ -5,8 +5,8 @@ from airflow.sdk import DAG
 with DAG(
     dag_id='dags_seoul_api_corona',
     schedule='0 0 * * *',
-    start_date=pendulum.datetime(2025, 7, 1, tz='Asia/Seoul'),
-    catchup=False
+    start_date=pendulum.datetime(2025, 8, 3, tz='Asia/Seoul'),
+    catchup=True
 )as dag:
 
     '''서울시 코로나19 확진자 발생동향'''
