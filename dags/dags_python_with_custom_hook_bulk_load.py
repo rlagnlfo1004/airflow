@@ -14,7 +14,7 @@ with DAG(
         custom_postgres_hook = CustomPostgresHook(postgres_conn_id)
         custom_postgres_hook.bulk_load(table_name=tlb_nm, file_name=file_nm, delimeter=',', is_header=True, is_replace=True)
 
-    insrt_postgres PythonOperator(
+    insrt_postgres = PythonOperator(
         task_id='insrt_postgres',
         python_callable=insrt_postgres,
         op_kwargs={
