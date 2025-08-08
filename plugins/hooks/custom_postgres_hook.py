@@ -26,21 +26,18 @@ class CustomPostgresHook(BaseHook):
 
         header = 0 if is_header else None
         if_exists = 'replace' if is_replace else 'append'
-
-        try:
-            file_df = pd.read_csv(file_name, header=header, delimiter=delimiter, encoding='utf-8')
-        except UnicodeDecodeError:
-            file_df = pd.read_csv(file_name, header=header, delimiter=delimiter, encoding='cp949')
+        file_df = pd.read_csv(file_name, header=header, delimiter=delimiter)
 
         for col in file_df.columns:
-            if file_df[col].dtype == 'object':
-                file_df[col] = file_df[col].astype(str).str.replace(r'[\r\n\t]+', '', regex=True)
-                self.log.info(f'{table_name}.{col}: 개행문자, 탭 제거')
+            try:
+                # string 문자열이 아닐 경우 continue
+                file_df[col] = file_df[col].str.replace('\r\n', '')  # 줄넘김 및 ^M 제거
+                self.log.info(f'{table_name}.{col}: 개행문자 제거')
+            except:
+                continue
 
         self.log.info('적재 건수:' + str(len(file_df)))
-
         engine = self.get_sqlalchemy_engine()
-
         file_df.to_sql(name=table_name,
                        con=engine,
                        schema='public',
