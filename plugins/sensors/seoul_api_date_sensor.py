@@ -19,7 +19,7 @@ class SeoulApiDateSensor(BaseSensorOperator):
         day_off: 배치일 기준 생성여부를 확인하고자 하는 날짜 차이를 입력 (기본값: 0)
         '''
         super().__init__(**kwargs)
-        self.http_conn_id = 'openapi.seoul.go.kr'
+        self.http_conn_id = 'openapi-seoul-data'
         self.endpoint = '{{var.value.apikey_openapi_seoul_go_kr}}/json/' + dataset_nm + '/1/100'  # 100건만 추출
         self.base_dt_col = base_dt_col
         self.day_off = day_off
