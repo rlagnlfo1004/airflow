@@ -43,7 +43,7 @@ with DAG(
 
     bash_task = BashSensor(
         task_id='bash_task',
-        env={'FILE':'/opt/airflow/files/TbCorona19CountStatus/{{data_interval_end.in_timezone("Asia/Seoul") | ds_nodash}}/tvCorona19VaccinestatNew.csv'},
+        env={'FILE':'/opt/airflow/files/tvCorona19VaccinestatNew/{{data_interval_end.in_timezone("Asia/Seoul") | ds_nodash}}/tvCorona19VaccinestatNew.csv'},
         bash_command='echo "건수: `cat $FILE | wc -l`"',
     )
 
