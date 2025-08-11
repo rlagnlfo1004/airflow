@@ -12,7 +12,7 @@ with DAG(
         task_id='tb_corona_19_count_status_sensor',
         dataset_nm='TbCorona19CountStatus',
         base_dt_col='S_DT',
-        day_off=0,
+        day_off=-1000,
         poke_interval=600,
         mode='reschedule'
     )
@@ -21,7 +21,7 @@ with DAG(
         task_id='tv_corona19_vaccine_stat_new_sensor',
         dataset_nm='tvCorona19VaccinestatNew',
         base_dt_col='S_VC_DT',
-        day_off=-1,
+        day_off=-1000,
         poke_interval=600,
         mode='reschedule'
     )
