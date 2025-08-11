@@ -42,7 +42,7 @@ class CustomPostgresHook(BaseHook):
         for col in file_df.columns:
             if file_df[col].dtype == 'object':
                 # 문자열 열의 개행 문자, 탭 등을 제거합니다.
-                file_df[col] = file_df[col].astype(str).str.replace(r'[\r\n\t]+', '', regex=True)
+                file_df[col] = file_df[col].astype(str).str.replace('\r\n','')
                 self.log.info(f'{table_name}.{col}: 개행문자, 탭 제거')
 
         self.log.info('적재 건수:' + str(len(file_df)))
