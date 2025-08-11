@@ -27,7 +27,7 @@ with DAG(
 
     sensor_task_by_reschedule = BashSensor(
         task_id='sensor_task_by_reschedule',
-        env={'FILE': '/opt/airflow/files/tvCorona19VaccinestatNew/{{data_interval_end.in_timezone("Asia/Seoul") | ds_nodash }}/tvCorona19VaccinestatNew123.csv'},
+        env={'FILE': '/opt/airflow/files/tvCorona19VaccinestatNew/{{data_interval_end.in_timezone("Asia/Seoul") | ds_nodash }}/tvCorona19VaccinestatNew.csv'},
         bash_command=f'''echo $FILE && 
                             if [ -f $FILE ]; then 
                                   exit 0
