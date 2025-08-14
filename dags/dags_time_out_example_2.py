@@ -6,6 +6,7 @@ from airflow.providers.standard.operators.bash import BashOperator
 email_str = Variable.get("email_target")
 email_lst = [email.strip() for email in email_str.split(',')]
 
+
 with DAG(
         dag_id='dags_timeout_example_2',
         start_date=pendulum.datetime(2025, 8, 1, tz='Asia/Seoul'),
