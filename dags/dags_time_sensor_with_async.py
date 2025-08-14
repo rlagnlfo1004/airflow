@@ -3,7 +3,7 @@ from airflow.sdk import DAG
 from airflow.providers.standard.sensors.date_time import DateTimeSensorAsync
 
 with DAG(
-    dag_id="dags_time_sensor",
+    dag_id="dags_time_sensor_with_async",
     start_date=pendulum.datetime(2025, 8, 1, 0, 0, 0),
     end_date=pendulum.datetime(2025, 8, 1, 1, 0, 0),
     schedule="*/10 * * * *",
