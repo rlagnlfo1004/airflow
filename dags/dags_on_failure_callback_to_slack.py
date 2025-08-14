@@ -1,6 +1,6 @@
 from datetime import timedelta
 import pendulum
-from plugins.config.on_failure_callback_to_slack import on_failure_callback_to_slack
+from config.on_failure_callback_to_slack import on_failure_callback_to_slack
 from airflow.sdk import DAG
 from airflow.providers.standard.operators.bash import BashOperator
 
