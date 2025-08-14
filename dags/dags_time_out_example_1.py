@@ -13,6 +13,7 @@ with DAG(
     catchup=False,
     dagrun_timeout=timedelta(minutes=1),
     default_args={
+        'execution_timeout': timedelta(seconds=20),
         'email_on_failure': True,
         'email': email_list
     }
@@ -24,6 +25,7 @@ with DAG(
     )
 
     bash_sleep_10= BashOperator(
+        trigger_rule='all_done',
         task_id='bash_sleep_10',
         bash_command='sleep 10',
     )
